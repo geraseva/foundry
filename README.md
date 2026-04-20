@@ -25,6 +25,22 @@ pip install "rc-foundry[all]"
 > [!NOTE]
 > Use `pip` (not `uv`) for XPU installs since UV re-resolves dependencies and may replace your XPU torch with the standard PyPI version.
 
+**macOS (Apple Silicon) Installation**
+
+MPS support is available via a community fork. Install PyTorch first, then install directly from the fork:
+```bash
+pip install torch
+pip install "rc-foundry[all] @ git+https://github.com/fnachon/foundry.git"
+```
+
+All three models — **RFD3**, **RF3**, and **ProteinMPNN/LigandMPNN** — run on Apple Silicon MPS.
+
+> [!NOTE]
+> - The `rf3` extra (cuEquivariance) is Linux-only and is automatically skipped on macOS.
+> - Use `float32` precision — `bfloat16` is not supported on MPS. The MPS accelerator is selected and float32 precision is enforced automatically.
+> - Inference only; multi-GPU training is not supported on MPS.
+> - For `rf3 fold`, pass an absolute path to the input CIF file.
+
 **Downloading weights** Models can be downloaded to a target folder with:
 ```
 foundry install base-models --checkpoint-dir <path/to/ckpt/dir>
@@ -61,6 +77,16 @@ For an interactive Google Colab notebook walking through a basic design pipeline
 </div>
 
 > *See [models/rfd3/README.md](models/rfd3/README.md) for complete documentation.*
+
+### RFdiffusion3NA (RFD3NA)
+
+[RFdiffusion3NA](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v3) is an extension of RFDiffusion3 capable of designing also nucleic acid structures under complex constraints. 
+
+<div align="center">
+  <img src="models/rfd3na/docs/.assets/multipolymer.png" alt="RFdiffusion3NA multi polymer" width="400">
+</div>
+
+> *See [models/rfd3na/README.md](models/rfd3na/README.md) for complete documentation.*
 
 ### RosettaFold3 (RF3)
 

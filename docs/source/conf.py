@@ -57,3 +57,8 @@ source_suffix = {
     ".rst": "restructuredtext",
     ".md": "markdown",
     }
+
+html_js_files = [
+    ('https://scripts.simpleanalyticscdn.com/latest.js', {'async': 'async', 'defer': 'defer'}),
+]
+suppress_warnings = ["myst.xref_missing"]
